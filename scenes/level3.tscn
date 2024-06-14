@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkx5ybrt47fpf"]
+
+[ext_resource type="PackedScene" uid="uid://b2yfpunvcoul5" path="res://scenes/level.tscn" id="1_qqlcq"]
+[ext_resource type="PackedScene" uid="uid://cndar3edqbter" path="res://scenes/cup.tscn" id="2_cbdnh"]
+[ext_resource type="PackedScene" uid="uid://cpr4yx33i2gum" path="res://scenes/barrier.tscn" id="3_qafq2"]
+
+[node name="Level" instance=ExtResource("1_qqlcq")]
+
+[node name="Cup" parent="." index="3" instance=ExtResource("2_cbdnh")]
+position = Vector2(763, 518)
+
+[node name="Cup2" parent="." index="4" instance=ExtResource("2_cbdnh")]
+position = Vector2(905, 428)
+
+[node name="Cup3" parent="." index="5" instance=ExtResource("2_cbdnh")]
+position = Vector2(901, 265)
+
+[node name="Cup4" parent="." index="6" instance=ExtResource("2_cbdnh")]
+position = Vector2(652, 347)
+
+[node name="Cup5" parent="." index="7" instance=ExtResource("2_cbdnh")]
+position = Vector2(457, 503)
+
+[node name="Barrier" parent="." index="10" instance=ExtResource("3_qafq2")]
+position = Vector2(1118, 198)
+rotation = 0.785398
+
+[node name="Barrier2" parent="." index="11" instance=ExtResource("3_qafq2")]
+position = Vector2(1073, 22)
+rotation = 1.5708

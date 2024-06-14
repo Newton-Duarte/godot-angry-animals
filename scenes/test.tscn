@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckf1bre5xx2ee"]
+
+[ext_resource type="Script" path="res://scripts/RigidBody2D.gd" id="1_cjohv"]
+[ext_resource type="Texture2D" uid="uid://0m2764be4wmy" path="res://assets/player/parrot.png" id="1_v0mhu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nq40h"]
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mu7gx"]
+radius = 32.0624
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8f1g"]
+size = Vector2(1152, 20)
+
+[node name="Test" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(599, 306)
+input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_nq40h")
+freeze = true
+script = ExtResource("1_cjohv")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_v0mhu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_mu7gx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(577, 659)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_x8f1g")
+
+[connection signal="input_event" from="RigidBody2D" to="RigidBody2D" method="_on_input_event"]

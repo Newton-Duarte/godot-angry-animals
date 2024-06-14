@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cndar3edqbter"]
+
+[ext_resource type="Script" path="res://scripts/cup.gd" id="1_4p1be"]
+[ext_resource type="Texture2D" uid="uid://cl27oafm5ao14" path="res://assets/env/elementWood004.png" id="1_crqpa"]
+[ext_resource type="Texture2D" uid="uid://b4o0rg2ab4tql" path="res://assets/env/elementWood015.png" id="2_yf4eh"]
+[ext_resource type="AudioStream" uid="uid://cdxm3x1vh0clu" path="res://assets/audio/vanish.wav" id="4_jov22"]
+
+[sub_resource type="Animation" id="Animation_gslwj"]
+resource_name = "vanish"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Vanish")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_jov22")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vg818"]
+_data = {
+"vanish": SubResource("Animation_gslwj")
+}
+
+[node name="Cup" type="StaticBody2D" groups=["cup"]]
+script = ExtResource("1_4p1be")
+
+[node name="Sprites" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
+position = Vector2(-72, -68)
+texture = ExtResource("1_crqpa")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprites"]
+position = Vector2(72, -68)
+texture = ExtResource("1_crqpa")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("2_yf4eh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-53, -51, -53, 17, 53, 18, 53, -52, 17, -17, -19, -17)
+
+[node name="Vanish" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jov22")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vg818")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
